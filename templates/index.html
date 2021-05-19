@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Simple Flask TODO app in Python Flask</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script  type = "text/javascript">
+      function redirect(link) {
+        window.location.href = link;
+     }
+    </script>
+</head>
+  <body>
+  <div class="container">
+    <h2 class="display-2">Create</h2>
+    <form method="POST" action="/">
+         <div class="input-group mb-3">
+              <input type="text" name="text" class="form-control" placeholder="Add a new TODO item">
+                  <div class="input-group-append" id="button-addon">
+                    <button class="btn btn-outline-primary" type="submit" value="update">Create new</button>
+                  </div>
+            </div>
+    </form>
+
+    <h2 class="display-2">List</h2>
+    {% for note in notes %}
+      <p>
+        <form method="POST" action="/edit/{{note.id}}">
+            <div class="input-group mb-3">
+
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="hidden" name="done" value="off">
+                    <input type="checkbox" onclick="redirect('/edit/{{note.id}}')" data-target="/edit/{{note.id}}" name="done">
+                </div>
+              </div>
+
+              <input type="text" title="{{note.dateAdded}}" value="{{note.text}}" name="text" class="form-control">
+
+              <div class="input-group-append" id="button-addon2">
+                <button class="btn btn-outline-secondary" type="submit" value="update">Update</button>
+              </div>
+
+            </div>
+        </form>
+      {% endfor %}
+  </div>
+  </body>
+</html>
